@@ -45,3 +45,5 @@ yarn.lock
 
 # Ignore pnpm lock file
 pnpm-lock.yaml
+
+**/seed/
