@@ -39,3 +39,9 @@ dist/**/*
 
 # ignore yarn.lock
 yarn.lock
+
+# Ignore script files
+*.sh
+
+# Ignore pnpm lock file
+pnpm-lock.yaml
