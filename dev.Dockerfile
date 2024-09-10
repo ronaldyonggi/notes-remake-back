@@ -2,7 +2,6 @@ FROM node:22-bookworm
 
 WORKDIR /usr/src/app
 
-COPY package* ./
+COPY . .
 
 RUN npm i
-
