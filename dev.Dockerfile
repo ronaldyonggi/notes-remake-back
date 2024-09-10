@@ -2,6 +2,7 @@ FROM node:22-bookworm
 
 WORKDIR /usr/src/app
 
-COPY . .
+COPY package* ./
+COPY prisma ./prisma
 
-RUN npm i
+RUN npm i && npx prisma generate
