@@ -6,7 +6,8 @@
   "scripts": {
     "tsc": "tsc",
     "migrate": "prisma migrate dev",
-    "postmigrate": "npx @snaplet/seed sync"
+    "postmigrate": "npx @snaplet/seed sync",
+    "dev": "ts-node-dev ./src/index.ts"
   },
   "prisma": {
     "seed": "tsx prisma/seed/seed.ts"
