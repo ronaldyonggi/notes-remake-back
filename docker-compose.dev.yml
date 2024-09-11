@@ -5,7 +5,7 @@ services:
       dockerfile: dev.Dockerfile
     command: npm run dev
     ports:
-      - '127.0.0.1:3000:3000'
+      - '3000:3000'
     volumes:
       - ./:/usr/src/app
       - node_modules:/usr/src/app/node_modules
@@ -31,6 +31,36 @@ services:
       - dev-network
     ports:
       - '127.0.0.1:5432:5432'
+
+  frontend-dev:
+    build:
+      context: ../frontend
+      dockerfile: dev.Dockerfile
+    command: npm run dev -- --host
+    volumes:
+      - ../frontend:/usr/src/app
+    networks:
+      - dev-network
+    environment:
+      - VITE_NGINX=true
+      - VITE_NGINX_BACKEND_URL=${VITE_NGINX_BACKEND_URL}
+      - VITE_LOCAL_BACKEND_URL=${VITE_LOCAL_BACKEND_URL}
+
+    ports:
+      - '5173:5173'
+
+  nginx:
+    image: nginx:alpine-slim
+    volumes:
+      - ./nginx.dev.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - '8080:80'
+    container_name: nginx
+    networks:
+      - dev-network
+    depends_on:
+      - backend-dev
+      - frontend-dev
 
 volumes:
   node_modules:
